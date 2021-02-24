@@ -5,8 +5,9 @@ if (!defined('BASEPATH'))
 
 class Db_model extends CI_Model {
 	public function getLoginData($usr, $pwd){
-		$u = mysql_real_escape_string($usr);
-		$p = mysql_real_escape_string($pwd);
+		$db_connection = mysqli_connect("localhost","root","","humas_rt");
+		$u = mysqli_real_escape_string($db_connection, $usr);
+		$p = mysqli_real_escape_string($db_connection, $pwd);
 		//$p = md5(mysql_real_escape_string($pwd));
 		$cek_login = $this->db->get_where('user', array('username' => $u, 'password' => $p ));
 		if ($cek_login->num_rows() > 0) {

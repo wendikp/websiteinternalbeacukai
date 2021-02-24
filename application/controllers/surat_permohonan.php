@@ -1273,6 +1273,7 @@ class Surat_permohonan extends CI_Controller {
 
         //mengambil nilai
       $user = $this->session->userdata('username');
+      echo "$user";
       $query = mysql_query("SELECT nip FROM user WHERE username = '$user'");
       $user = mysql_fetch_array($query);
       $nip = $user['nip'];
