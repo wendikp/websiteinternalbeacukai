@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: 25 Agu 2017 pada 12.19
--- Versi Server: 10.1.9-MariaDB
--- PHP Version: 5.6.15
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 24 Feb 2021 pada 04.21
+-- Versi server: 10.1.36-MariaDB
+-- Versi PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -62,7 +64,7 @@ CREATE TABLE `artikel` (
 --
 
 INSERT INTO `artikel` (`id_artikel`, `penulis`, `judul`, `file_artikel`, `tanggal_upload`, `nip`, `id_foto`) VALUES
-(1, 'masuk g''?', 'iyadeh kayaknya', 0x3c703e706c65617365653c2f703e0d0a, '2017-08-24', '145150400111004', 1),
+(1, 'masuk g\'?', 'iyadeh kayaknya', 0x3c703e706c65617365653c2f703e0d0a, '2017-08-24', '145150400111004', 1),
 (2, 'wendi', 'seharunya masuk path', 0x3c703e6979613c2f703e0d0a, '2017-08-25', '145150400111004', 3),
 (3, 'penulis', 'judul artikel', 0x3c703e6173646c6b663b73646b663b73663c2f703e0d0a, '2017-08-25', '145150400111004', 23),
 (4, 'upload file foto', 'upload file foto', 0x3c703e75706c6f61642066696c6520666f746f3c2f703e0d0a, '2017-08-25', '145150400111004', 24),
@@ -302,8 +304,8 @@ CREATE TABLE `permohonan_rumah` (
 INSERT INTO `permohonan_rumah` (`id_permohonan`, `id_jenis_permohonan`, `no_surat`, `nip`, `tgl_mohon`, `tgl_upload`) VALUES
 (1, 1, 'baru', '145150400111004', '2017-08-24', '2017-08-24 01:42:38'),
 (2, 2, 'cabut', '145150400111004', '2017-08-24', '2017-08-24 01:45:37'),
-(3, 2, 'bisa g''?', '145150400111004', '2017-08-24', '2017-08-24 04:11:54'),
-(4, 1, 'bisa g'' yang ini', '145150400111004', '2017-08-24', '2017-08-24 04:15:05');
+(3, 2, 'bisa g\'?', '145150400111004', '2017-08-24', '2017-08-24 04:11:54'),
+(4, 1, 'bisa g\' yang ini', '145150400111004', '2017-08-24', '2017-08-24 04:15:05');
 
 -- --------------------------------------------------------
 
@@ -437,63 +439,63 @@ CREATE TABLE `video` (
 --
 
 --
--- Indexes for table `admin`
+-- Indeks untuk tabel `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`username`);
 
 --
--- Indexes for table `artikel`
+-- Indeks untuk tabel `artikel`
 --
 ALTER TABLE `artikel`
   ADD PRIMARY KEY (`id_artikel`),
   ADD KEY `nip` (`nip`);
 
 --
--- Indexes for table `atk`
+-- Indeks untuk tabel `atk`
 --
 ALTER TABLE `atk`
   ADD PRIMARY KEY (`id_atk`);
 
 --
--- Indexes for table `bidang_bagian`
+-- Indeks untuk tabel `bidang_bagian`
 --
 ALTER TABLE `bidang_bagian`
   ADD PRIMARY KEY (`id_bidang`);
 
 --
--- Indexes for table `foto`
+-- Indeks untuk tabel `foto`
 --
 ALTER TABLE `foto`
   ADD PRIMARY KEY (`id_foto`),
   ADD KEY `nip` (`nip`);
 
 --
--- Indexes for table `inventaris`
+-- Indeks untuk tabel `inventaris`
 --
 ALTER TABLE `inventaris`
   ADD PRIMARY KEY (`id_inventaris`);
 
 --
--- Indexes for table `jabatan`
+-- Indeks untuk tabel `jabatan`
 --
 ALTER TABLE `jabatan`
   ADD PRIMARY KEY (`id_jabatan`);
 
 --
--- Indexes for table `jenis_kbd`
+-- Indeks untuk tabel `jenis_kbd`
 --
 ALTER TABLE `jenis_kbd`
   ADD PRIMARY KEY (`id_jenis_kbd`);
 
 --
--- Indexes for table `jenis_permohonan`
+-- Indeks untuk tabel `jenis_permohonan`
 --
 ALTER TABLE `jenis_permohonan`
   ADD PRIMARY KEY (`id_jenis_permohonan`);
 
 --
--- Indexes for table `kbd`
+-- Indeks untuk tabel `kbd`
 --
 ALTER TABLE `kbd`
   ADD PRIMARY KEY (`nopol`),
@@ -502,14 +504,14 @@ ALTER TABLE `kbd`
   ADD KEY `id_service` (`id_service`);
 
 --
--- Indexes for table `kritik_saran`
+-- Indeks untuk tabel `kritik_saran`
 --
 ALTER TABLE `kritik_saran`
   ADD PRIMARY KEY (`id`),
   ADD KEY `nip` (`nip`);
 
 --
--- Indexes for table `permintaan_atk`
+-- Indeks untuk tabel `permintaan_atk`
 --
 ALTER TABLE `permintaan_atk`
   ADD PRIMARY KEY (`id_permintaan`),
@@ -517,14 +519,14 @@ ALTER TABLE `permintaan_atk`
   ADD KEY `nip` (`nip`);
 
 --
--- Indexes for table `permohonan_rumah`
+-- Indeks untuk tabel `permohonan_rumah`
 --
 ALTER TABLE `permohonan_rumah`
   ADD PRIMARY KEY (`id_permohonan`),
   ADD KEY `id_jenis_permohonan` (`id_jenis_permohonan`);
 
 --
--- Indexes for table `permohonan_service`
+-- Indeks untuk tabel `permohonan_service`
 --
 ALTER TABLE `permohonan_service`
   ADD PRIMARY KEY (`id_permohonan`),
@@ -532,14 +534,14 @@ ALTER TABLE `permohonan_service`
   ADD KEY `nip` (`nip`);
 
 --
--- Indexes for table `riwayat_service`
+-- Indeks untuk tabel `riwayat_service`
 --
 ALTER TABLE `riwayat_service`
   ADD PRIMARY KEY (`id_service`),
   ADD KEY `nopol` (`nopol`);
 
 --
--- Indexes for table `rumah_dinas`
+-- Indeks untuk tabel `rumah_dinas`
 --
 ALTER TABLE `rumah_dinas`
   ADD PRIMARY KEY (`id_rumah`),
@@ -547,13 +549,13 @@ ALTER TABLE `rumah_dinas`
   ADD KEY `id_foto` (`id_foto`);
 
 --
--- Indexes for table `status`
+-- Indeks untuk tabel `status`
 --
 ALTER TABLE `status`
   ADD PRIMARY KEY (`id_status`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`nip`),
@@ -561,51 +563,58 @@ ALTER TABLE `user`
   ADD KEY `id_bidang` (`id_bidang`);
 
 --
--- Indexes for table `video`
+-- Indeks untuk tabel `video`
 --
 ALTER TABLE `video`
   ADD PRIMARY KEY (`id_video`),
   ADD KEY `nip` (`nip`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `bidang_bagian`
+-- AUTO_INCREMENT untuk tabel `bidang_bagian`
 --
 ALTER TABLE `bidang_bagian`
   MODIFY `id_bidang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
--- AUTO_INCREMENT for table `foto`
+-- AUTO_INCREMENT untuk tabel `foto`
 --
 ALTER TABLE `foto`
   MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
 --
--- AUTO_INCREMENT for table `jabatan`
+-- AUTO_INCREMENT untuk tabel `jabatan`
 --
 ALTER TABLE `jabatan`
   MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `kritik_saran`
+-- AUTO_INCREMENT untuk tabel `kritik_saran`
 --
 ALTER TABLE `kritik_saran`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT for table `permohonan_rumah`
+-- AUTO_INCREMENT untuk tabel `permohonan_rumah`
 --
 ALTER TABLE `permohonan_rumah`
   MODIFY `id_permohonan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
--- AUTO_INCREMENT for table `permohonan_service`
+-- AUTO_INCREMENT untuk tabel `permohonan_service`
 --
 ALTER TABLE `permohonan_service`
-  MODIFY `id_permohonan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_permohonan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT for table `rumah_dinas`
+-- AUTO_INCREMENT untuk tabel `rumah_dinas`
 --
 ALTER TABLE `rumah_dinas`
   MODIFY `id_rumah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
@@ -668,6 +677,7 @@ ALTER TABLE `user`
 --
 ALTER TABLE `video`
   ADD CONSTRAINT `video_ibfk_1` FOREIGN KEY (`nip`) REFERENCES `user` (`nip`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
