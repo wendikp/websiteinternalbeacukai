@@ -15,6 +15,8 @@ class M_proses extends CI_Model {
 		$this->load->database();
 	}
 
+
+
 	public function insert_admin($params){
 		$nip = rand(500,1000000000000);
 
@@ -418,7 +420,18 @@ class M_proses extends CI_Model {
 	}
 
 	public function insert_ATK($params){
+		$data = $this->db->query("SELECT id_atk FROM atk ORDER BY id_atk DESC LIMIT 1");
+		
+		$cek = $data->result()[0];
+
+        if ($cek->id_atk == NULL) {
+			$id_atk = 1;
+		} else {
+			$id_atk = $cek->id_atk + 1;
+		}
+
 		$fields = array(
+			'id_atk'       => $id_atk,
 			'atk'          => $params['atk'],
 			'ketersediaan' => $params['ketersediaan'],
 			'satuan'       => $params['satuan']
@@ -482,6 +495,13 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
+	public function select_nip($user){
+		$data = $this->db->query("
+			SELECT nip FROM user WHERE username = $user
+			");
+		return $data->result();
+	}
+
 	public function select_daftarUser(){
 		$data = $this->db->query("
 			SELECT nip, nama_lkp, bagian, tgl_lhr, alamat, username, password, jabatan, golongan FROM user u, bidang_bagian b 
@@ -492,7 +512,7 @@ class M_proses extends CI_Model {
 
 	public function select_perumahan_araya(){
 		$data = $this->db->query("
-			SELECT id_rumah, r.id_foto, path_foto, id_listrik, id_pdam, lokasi, alamat, penghuni, keterangan FROM foto f, rumah_dinas
+			SELECT id_rumah, r.id_foto, path_foto, id_listrik, id_pdam, lokasi, alamat, penghuni, keterangan FROM foto f, rumah_dinas r
 			WHERE f.id_foto = r.id_foto and lokasi = 'araya'");
 		return $data->result();
 	}
@@ -618,7 +638,7 @@ class M_proses extends CI_Model {
 
 	public function select_daftarArtikel(){
 		$data = $this->db->query("
-			SELECT id_artikel, judul, penulis, bagian, concat(day(a.tanggal_upload),' ',monthname(a.tanggal_upload),' ',year(a.tanggal_upload)) as tanggal_up, status, path_foto, penulis, judul, a.read_status
+			SELECT id_artikel, judul, penulis, bagian, concat(day(a.tanggal_upload),' ',monthname(a.tanggal_upload),' ',year(a.tanggal_upload)) as tanggal_up, path_foto, penulis, status, judul, a.read_status
 			    FROM bidang_bagian b, artikel a, user u, foto f
 			    WHERE u.nip = a.nip 
 			        and u.id_bidang = b.id_bidang 

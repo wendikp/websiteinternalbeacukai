@@ -25,7 +25,23 @@
     <script>
         $(document).ready(function(e){
             //variabel
-            var html = '<p /> <div><input class="form-control col-md-3" type="text" name="atk[]" id="atk" placeholder="Barang yang diinginkan" required="required" style="width: 171px" list="value"><datalist id="value"> <?php foreach ($data as $row) { if ($row->stok < 1) { ?> <option value="$row->atk"> <?php echo $row->atk." [STOK HABIS]" ?> </option> <?php } else { ?> <option value="<?php $row->atk ?>"> <?php echo $row->atk ?> </option> <?php }} ?> </datalist><p style="margin-top: 6px; width: 86px;" class="col-md-3">Jumlah = </p><input class="form-control col-md-3" type="text" name="volume[]" id="volume" placeholder="Jumlah" style="width: 72px; margin-right: 10px;"><input class="form-control col-md-3" type="text" name="satuan[]" id="satuan" placeholder="Satuan" style="width: 72px"><button class="btn btn-danger" type="button" id="remove" style="margin-left: 8px"><i class="glyphicon glyphicon-remove"></i></button></div>';
+            var html = `<p /> 
+            <div>
+                <input class="form-control col-md-3" type="text" name="atk[]" id="atk" placeholder="Barang yang diinginkan" required="required" style="width: 171px" list="value">
+                <datalist id="value"> <?php 
+                    foreach ($data as $row) { 
+                        if ($row->stok < 1) { ?> 
+                            <option value="$row->atk"> <?php echo $row->atk." [STOK HABIS]" ?> </option> <?php 
+                        } else { ?> 
+                            <option value="<?php $row->atk ?>"> <?php echo "- " . $row->atk ?> </option> <?php 
+                        }
+                    } ?> 
+                </datalist>
+                <p style="margin-top: 6px; width: 86px;" class="col-md-3">Jumlah = </p>
+                <input class="form-control col-md-3" type="text" name="volume[]" id="volume" placeholder="Jumlah" style="width: 72px; margin-right: 10px;">
+                <input class="form-control col-md-3" type="text" name="satuan[]" id="satuan" placeholder="Satuan" style="width: 72px">
+                <button class="btn btn-danger" type="button" id="remove" style="margin-left: 8px"><i class="glyphicon glyphicon-remove"></i></button>
+            </div>`;
 
             //add rows
             $("#add").click(function(e){

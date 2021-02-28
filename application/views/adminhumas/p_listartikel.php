@@ -320,6 +320,7 @@
 
                     <tbody>
                       <?php
+                      var_dump($data);
                       foreach ($data as $row) {
                         ?>
                         <tr>
