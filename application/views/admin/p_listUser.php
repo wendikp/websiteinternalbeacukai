@@ -190,7 +190,6 @@
                         <th>Jabatan</th>
                         <th>Golongan</th>
                         <th>Username</th>
-                        <th>Password</th>
                         <th>Tools</th>
                       </tr>
                     </thead>
@@ -206,7 +205,6 @@
                           <td><?php echo $row->jabatan;?></td>
                           <td><?php echo $row->golongan;?></td>
                           <td><?php echo $row->username;?></td>
-                          <td><?php echo $row->password;?></td>
                           <td width="80px">
                             <div class="btn-group">
                             <a class="btn btn-default btn-sm btn-size" href="<?php echo base_url().'proses_data/editUser/'.$row->nip?>"><i class="fa fa-edit"></i>

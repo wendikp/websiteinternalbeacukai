@@ -173,8 +173,8 @@
                         <div class="clearfix"></div>
                         <h2 class="section-heading">Contact </h2>
                         <hr width="10%" align="left">
-                        <p class="lead">Email : <br/> 
-                            Telepon : </p>
+                        <p class="lead">Fax : 0341-402739<br/> 
+                            Telepon : 0341-402740</p>
                         </div>
                     </div>
 

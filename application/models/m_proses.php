@@ -489,9 +489,10 @@ class M_proses extends CI_Model {
 	public function select_daftarAdmin(){
 		$data = $this->db->query("
 			SELECT nip, username, password, status FROM user u, status s 
-			WHERE u.id_bidang = 6 AND
+			WHERE u.id_status != 4 AND
 			      u.id_status = s.id_status
 			");
+
 		return $data->result();
 	}
 
@@ -504,7 +505,7 @@ class M_proses extends CI_Model {
 
 	public function select_daftarUser(){
 		$data = $this->db->query("
-			SELECT nip, nama_lkp, bagian, tgl_lhr, alamat, username, password, jabatan, golongan FROM user u, bidang_bagian b 
+			SELECT nip, nama_lkp, bagian, tgl_lhr, alamat, username, password, u.jabatan, u.golongan FROM user u, bidang_bagian b 
 			WHERE u.id_status = 4 && u.id_bidang = b.id_bidang
 		");
 		return $data->result();
@@ -828,7 +829,7 @@ class M_proses extends CI_Model {
 
 	public function selectData($nip){
 		$data = $this->db->query("
-			SELECT UPPER(bagian) as bagian, nama_lkp, nip, jabatan, golongan FROM bidang_bagian b, user u WHERE nip = $nip && u.id_bidang = b.id_bidang
+			SELECT UPPER(bagian) as bagian, nama_lkp, nip, u.jabatan, u.golongan FROM bidang_bagian b, user u WHERE nip = $nip && u.id_bidang = b.id_bidang
 			");
 		return $data->result();
 	}
@@ -850,7 +851,7 @@ class M_proses extends CI_Model {
 
 	public function selectDataUser($nip){
 		$data = $this->db->query("
-			SELECT nip, username, password, nama_lkp, alamat, tgl_lhr FROM user WHERE nip = $nip
+			SELECT nip, username, password, nama_lkp, alamat, tgl_lhr, u.jabatan, u.golongan, bagian FROM user u, bidang_bagian b WHERE nip = $nip AND u.id_bidang = b.id_bidang
 			");
 		return $data->result();
 	}
@@ -1316,24 +1317,24 @@ class M_proses extends CI_Model {
 	}
 
 	public function updateDataUser($params){
+
 		$user      = $params['user'];
 		$pwd       = $params['pwd'];
 		$status    = $params['status'];
 		$nip       = $params['nip'];
 		$nama_lkp  = $params['nama'];
-		$id_bidang = $params['bagian'];
+		// $bagian = $params['bagian'];
 		$tgl_lhr   = $params['tgl'];
 		$alamat    = $params['alamat'];
 		$jabatan    = $params['jabatan'];
 		$gol    = $params['gol'];
-		//nip       = '$nip',
+
 		$this->db->query("
 			UPDATE user 
 			    SET username  = '$user', 
 			        password  = '$pwd', 
 			        id_status = '$status',
 			        nama_lkp  = '$nama_lkp',
-			        id_bidang = '$id_bidang',
 			        tgl_lhr   = '$tgl_lhr',
 			        alamat    = '$alamat',
 			        jabatan   = '$jabatan',

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Feb 2021 pada 04.21
+-- Waktu pembuatan: 04 Mar 2021 pada 12.17
 -- Versi server: 10.1.36-MariaDB
 -- Versi PHP: 7.2.11
 
@@ -53,23 +53,20 @@ CREATE TABLE `artikel` (
   `id_artikel` int(11) NOT NULL,
   `penulis` varchar(50) NOT NULL,
   `judul` varchar(100) NOT NULL,
-  `file_artikel` blob NOT NULL,
+  `file_artikel` longtext NOT NULL,
   `tanggal_upload` date NOT NULL,
   `nip` varchar(16) DEFAULT NULL,
-  `id_foto` int(11) DEFAULT NULL
+  `id_foto` int(11) DEFAULT NULL,
+  `read_status` varchar(10) NOT NULL,
+  `status` varchar(30) NOT NULL DEFAULT 'Not Approved'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `artikel`
 --
 
-INSERT INTO `artikel` (`id_artikel`, `penulis`, `judul`, `file_artikel`, `tanggal_upload`, `nip`, `id_foto`) VALUES
-(1, 'masuk g\'?', 'iyadeh kayaknya', 0x3c703e706c65617365653c2f703e0d0a, '2017-08-24', '145150400111004', 1),
-(2, 'wendi', 'seharunya masuk path', 0x3c703e6979613c2f703e0d0a, '2017-08-25', '145150400111004', 3),
-(3, 'penulis', 'judul artikel', 0x3c703e6173646c6b663b73646b663b73663c2f703e0d0a, '2017-08-25', '145150400111004', 23),
-(4, 'upload file foto', 'upload file foto', 0x3c703e75706c6f61642066696c6520666f746f3c2f703e0d0a, '2017-08-25', '145150400111004', 24),
-(5, 'upload file foto', 'upload file foto', 0x3c703e75706c6f61642066696c6520666f746f3c2f703e0d0a, '2017-08-25', '145150400111004', 25),
-(6, 'penulis', 'penulis', 0x73646666736166, '2017-08-25', '145150400111004', 26);
+INSERT INTO `artikel` (`id_artikel`, `penulis`, `judul`, `file_artikel`, `tanggal_upload`, `nip`, `id_foto`, `read_status`, `status`) VALUES
+(7, 'Nama User 01', 'Judul Artikel User 01', '    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n\r\n    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2021-03-01', '1234567801', 27, 'true', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -79,8 +76,19 @@ INSERT INTO `artikel` (`id_artikel`, `penulis`, `judul`, `file_artikel`, `tangga
 
 CREATE TABLE `atk` (
   `id_atk` int(11) NOT NULL,
-  `atk` varchar(50) NOT NULL
+  `atk` varchar(50) NOT NULL,
+  `ketersediaan` char(1) NOT NULL,
+  `satuan` varchar(10) NOT NULL,
+  `stok` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `atk`
+--
+
+INSERT INTO `atk` (`id_atk`, `atk`, `ketersediaan`, `satuan`, `stok`) VALUES
+(0, 'Pulpen', 'y', 'Kotak', 10),
+(1, 'Buku', 'y', 'Dus', 10);
 
 -- --------------------------------------------------------
 
@@ -90,19 +98,21 @@ CREATE TABLE `atk` (
 
 CREATE TABLE `bidang_bagian` (
   `id_bidang` int(11) NOT NULL,
-  `bagian` varchar(25) NOT NULL
+  `bagian` varchar(25) NOT NULL,
+  `jabatan` varchar(50) NOT NULL,
+  `golongan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `bidang_bagian`
 --
 
-INSERT INTO `bidang_bagian` (`id_bidang`, `bagian`) VALUES
-(1, 'Umum'),
-(2, 'Fasilitas Kepabeanan'),
-(3, 'Kepatuhan Internal'),
-(4, 'Kepabeanan dan Cukai'),
-(5, 'Penindakan dan Penyidikan');
+INSERT INTO `bidang_bagian` (`id_bidang`, `bagian`, `jabatan`, `golongan`) VALUES
+(1, 'Umum', '', ''),
+(2, 'Fasilitas Kepabeanan', '', ''),
+(3, 'Kepatuhan Internal', '', ''),
+(4, 'Kepabeanan dan Cukai', '', ''),
+(5, 'Penindakan dan Penyidikan', '', '');
 
 -- --------------------------------------------------------
 
@@ -117,25 +127,26 @@ CREATE TABLE `foto` (
   `tanggal_upload` date NOT NULL,
   `nip` varchar(16) DEFAULT NULL,
   `deskripsi` text NOT NULL,
-  `token` varchar(100) DEFAULT NULL
+  `token` varchar(100) DEFAULT NULL,
+  `read_status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `foto`
 --
 
-INSERT INTO `foto` (`id_foto`, `file_name`, `path_foto`, `tanggal_upload`, `nip`, `deskripsi`, `token`) VALUES
-(1, 'avatar2.png', 'avatar2.png', '2017-08-24', '145150400111004', '', NULL),
-(2, 'rumah.jpg', 'photo/rumah.jpg', '2017-08-25', NULL, 'foto rumah', NULL),
-(3, 'avatar2.png', 'photo/avatar2.png', '2017-08-25', '145150400111004', '', NULL),
-(19, 'rumah1.jpg', 'photo/rumah1.jpg', '2017-08-09', NULL, 'rumah1', NULL),
-(20, 'rumah2.jpg', 'photo/rumah2.jpg', '2017-08-25', NULL, 'rumah2', NULL),
-(21, 'motor.jpg', 'photo/motor.jpg', '2017-08-25', NULL, 'motor', NULL),
-(22, 'mobil.jpg', 'photo/mobil.jpg', '2017-08-25', NULL, 'mobil', NULL),
-(23, 'avatar3.png', 'photo/avatar3.png', '2017-08-25', '145150400111004', '', NULL),
-(24, 'banner-bg.jpg', 'photo/banner-bg.jpg', '2017-08-25', '145150400111004', '', NULL),
-(25, 'banner-bg.jpg', 'photo/banner-bg.jpg', '2017-08-25', '145150400111004', '', NULL),
-(26, 'avatar5.png', 'photo/avatar5.png', '2017-08-25', '145150400111004', '', NULL);
+INSERT INTO `foto` (`id_foto`, `file_name`, `path_foto`, `tanggal_upload`, `nip`, `deskripsi`, `token`, `read_status`) VALUES
+(1, 'avatar2.png', 'avatar2.png', '2017-08-24', '145150400111004', '', NULL, 'true'),
+(2, 'rumah.jpg', 'photo/rumah.jpg', '2017-08-25', NULL, 'foto rumah', NULL, 'true'),
+(19, 'rumah1.jpg', 'photo/rumah1.jpg', '2017-08-09', NULL, 'rumah1', NULL, 'true'),
+(20, 'rumah2.jpg', 'photo/rumah2.jpg', '2017-08-25', NULL, 'rumah2', NULL, 'true'),
+(21, 'motor.jpg', 'photo/motor.jpg', '2017-08-25', NULL, 'motor', NULL, 'true'),
+(22, 'mobil.jpg', 'photo/mobil.jpg', '2017-08-25', NULL, 'mobil', NULL, 'true'),
+(23, 'avatar3.png', 'photo/avatar3.png', '2017-08-25', '145150400111004', '', NULL, 'true'),
+(24, 'banner-bg.jpg', 'photo/banner-bg.jpg', '2017-08-25', '145150400111004', '', NULL, 'true'),
+(25, 'banner-bg.jpg', 'photo/banner-bg.jpg', '2017-08-25', '145150400111004', '', NULL, 'true'),
+(26, 'avatar5.png', 'photo/avatar5.png', '2017-08-25', '145150400111004', '', NULL, 'true'),
+(27, 'product-school-nOvIa_x_tfo-unsplash.jpg', 'photo/product-school-nOvIa_x_tfo-unsplash.jpg', '2021-03-01', '1234567801', '', NULL, 'true');
 
 -- --------------------------------------------------------
 
@@ -159,6 +170,38 @@ CREATE TABLE `jabatan` (
   `id_jabatan` int(11) NOT NULL,
   `jabatan` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `jabatan`
+--
+
+INSERT INTO `jabatan` (`id_jabatan`, `jabatan`) VALUES
+(1, 'Kepala Kantor'),
+(2, 'Kepala Bagian Umum'),
+(3, 'Kabid Fasilitas Kepa'),
+(4, 'Kabid Kepatuhan Inte'),
+(5, 'Kabid Kepabeanan dan'),
+(6, 'Kabid Penindakan dan'),
+(7, 'Kasi Keberatan dan B'),
+(8, 'Kasi Bantuan Hukum'),
+(9, 'Kasi Kepatuhan Pelak'),
+(10, 'Kasi Fasilitas Pabea'),
+(11, 'Kasi Penindakan I'),
+(12, 'Kasi Kepatuhan Pelak'),
+(13, 'Kasi Fasilitas Pabea'),
+(14, 'Kasi Penindakan II'),
+(15, 'Kasi Informasi Kepab'),
+(16, 'Kasubag Humas dan Ru'),
+(17, 'Kepala Subbagian Kep'),
+(18, 'Kasubag TU dan Keuan'),
+(19, 'Kepala Seksi Penyidi'),
+(20, 'Kasi Kepatuhan Pelak'),
+(21, 'Kepala Seksi Penyidi'),
+(22, 'Kepala Seksi Fasilit'),
+(23, 'Kepala Seksi Intelij'),
+(24, 'Kepala Seksi Pabean '),
+(25, 'Pelaksana Pemeriksa'),
+(26, 'Pelaksana Administra');
 
 -- --------------------------------------------------------
 
@@ -255,18 +298,12 @@ INSERT INTO `kbd` (`nopol`, `merek`, `pic_kbd`, `nomor_kep`, `nip`, `id_jenis_kb
 
 CREATE TABLE `kritik_saran` (
   `id` int(11) NOT NULL,
+  `perihal` varchar(255) NOT NULL,
   `kritik_saran` text NOT NULL,
   `nip` varchar(16) NOT NULL,
-  `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `read_status` varchar(10) NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `kritik_saran`
---
-
-INSERT INTO `kritik_saran` (`id`, `kritik_saran`, `nip`, `tanggal`) VALUES
-(1, 'sadflksjdflsjfljsldfjsldf', '145150400111004', '2017-08-23 21:19:06'),
-(2, 'iini kritik saya ya tuhaaan', '145150400111004', '2017-08-24 02:28:50');
 
 -- --------------------------------------------------------
 
@@ -278,8 +315,38 @@ CREATE TABLE `permintaan_atk` (
   `id_permintaan` int(11) NOT NULL,
   `nip` varchar(16) NOT NULL,
   `id_barang` int(11) NOT NULL,
+  `kode` varchar(20) NOT NULL,
+  `barang` varchar(50) NOT NULL,
+  `volume` varchar(50) NOT NULL,
+  `satuan` varchar(50) NOT NULL,
+  `nosurat` varchar(20) NOT NULL,
   `jumlah` int(11) NOT NULL,
-  `tanggal_permohonan` int(11) NOT NULL
+  `tanggal_permohonan` int(11) NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'Not Approved',
+  `read_status` varchar(10) NOT NULL DEFAULT 'false'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `permintaan_atk`
+--
+
+INSERT INTO `permintaan_atk` (`id_permintaan`, `nip`, `id_barang`, `kode`, `barang`, `volume`, `satuan`, `nosurat`, `jumlah`, `tanggal_permohonan`, `status`, `read_status`) VALUES
+(1, '1234567801', 0, '1', 'Buku', '3', 'Buah', 'nomor_surat_01/03-20', 0, 2021, 'Not Approved', 'true'),
+(2, '1234567801', 0, '1', 'Pulpen', '1', 'Kotak', 'nomor_surat_01/03-20', 0, 2021, 'Not Approved', 'true'),
+(3, '1234567801', 0, '1', 'Kertas HVS', '5', 'Rim', 'nomor_surat_01/03-20', 0, 2021, 'Not Approved', 'true'),
+(4, '1234567801', 0, '1', 'Tinta Printer Hitam', '1', 'Buah', 'nomor_surat_01/03-20', 0, 2021, 'Not Approved', 'true'),
+(5, '1234567801', 0, '1', 'Kursi', '4', 'Buah', 'nomor_surat_01/03-20', 0, 2021, 'Not Approved', 'true'),
+(6, '1234567801', 0, '1', 'Meja', '1', 'Buah', 'nomor_surat_01/03-20', 0, 2021, 'Not Approved', 'true');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `permohonan_inventaris`
+--
+
+CREATE TABLE `permohonan_inventaris` (
+  `id` int(11) DEFAULT NULL,
+  `read_status` varchar(10) NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -294,18 +361,20 @@ CREATE TABLE `permohonan_rumah` (
   `no_surat` varchar(50) NOT NULL,
   `nip` varchar(16) NOT NULL,
   `tgl_mohon` date NOT NULL,
-  `tgl_upload` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `tgl_upload` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `read_status` varchar(10) NOT NULL DEFAULT 'false',
+  `status` varchar(20) NOT NULL DEFAULT 'Not Approved'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `permohonan_rumah`
 --
 
-INSERT INTO `permohonan_rumah` (`id_permohonan`, `id_jenis_permohonan`, `no_surat`, `nip`, `tgl_mohon`, `tgl_upload`) VALUES
-(1, 1, 'baru', '145150400111004', '2017-08-24', '2017-08-24 01:42:38'),
-(2, 2, 'cabut', '145150400111004', '2017-08-24', '2017-08-24 01:45:37'),
-(3, 2, 'bisa g\'?', '145150400111004', '2017-08-24', '2017-08-24 04:11:54'),
-(4, 1, 'bisa g\' yang ini', '145150400111004', '2017-08-24', '2017-08-24 04:15:05');
+INSERT INTO `permohonan_rumah` (`id_permohonan`, `id_jenis_permohonan`, `no_surat`, `nip`, `tgl_mohon`, `tgl_upload`, `read_status`, `status`) VALUES
+(1, 1, 'baru', '145150400111004', '2017-08-24', '2021-02-28 15:48:07', 'false', 'Not Approved'),
+(2, 2, 'cabut', '145150400111004', '2017-08-24', '2021-02-28 15:48:07', 'false', 'Not Approved'),
+(3, 2, 'bisa g\'?', '145150400111004', '2017-08-24', '2021-02-28 15:48:07', 'false', 'Not Approved'),
+(4, 1, 'bisa g\' yang ini', '145150400111004', '2017-08-24', '2021-02-28 15:48:07', 'false', 'Not Approved');
 
 -- --------------------------------------------------------
 
@@ -320,16 +389,10 @@ CREATE TABLE `permohonan_service` (
   `plat_nomor` varchar(50) NOT NULL,
   `tgl_mohon` date NOT NULL,
   `tgl_upload` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `nip` varchar(16) NOT NULL
+  `nip` varchar(16) NOT NULL,
+  `read_status` varchar(10) NOT NULL DEFAULT 'false',
+  `status` varchar(20) NOT NULL DEFAULT 'Not Approved'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `permohonan_service`
---
-
-INSERT INTO `permohonan_service` (`id_permohonan`, `id_jenis_kbd`, `no_surat`, `plat_nomor`, `tgl_mohon`, `tgl_upload`, `nip`) VALUES
-(1, 1, 'roda2', 'sdfdf', '2017-08-24', '2017-08-24 02:01:56', '145150400111004'),
-(2, 2, 'roda4', 'platnomor kbd2', '2017-08-24', '2017-08-24 02:07:49', '145150400111004');
 
 -- --------------------------------------------------------
 
@@ -342,7 +405,8 @@ CREATE TABLE `riwayat_service` (
   `nopol` varchar(20) NOT NULL,
   `tanggal` date NOT NULL,
   `keterangan` tinytext NOT NULL,
-  `kbd` tinyint(4) NOT NULL
+  `kbd` tinyint(4) NOT NULL,
+  `id_jenis_kbd` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -407,17 +471,20 @@ CREATE TABLE `user` (
   `alamat` varchar(100) DEFAULT NULL,
   `nama_lkp` varchar(50) NOT NULL,
   `id_status` int(11) NOT NULL,
-  `id_bidang` int(11) DEFAULT NULL
+  `id_bidang` int(11) DEFAULT NULL,
+  `jabatan` varchar(100) NOT NULL,
+  `golongan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`nip`, `username`, `password`, `tgl_lhr`, `alamat`, `nama_lkp`, `id_status`, `id_bidang`) VALUES
-('145150400111004', 'wendikp', '12345678', '2017-08-02', 'jl panjaitan', 'wendi kurnia putra', 4, 1),
-('212', 'adminhumas', '12345', NULL, NULL, 'asdfd', 2, NULL),
-('234', 'adminrt', '12345', NULL, NULL, 'sdfdsf', 3, NULL);
+INSERT INTO `user` (`nip`, `username`, `password`, `tgl_lhr`, `alamat`, `nama_lkp`, `id_status`, `id_bidang`, `jabatan`, `golongan`) VALUES
+('1234567801', 'user_01', 'user_01', '1980-01-05', ' Jl. Mayjend Panjaitan, No.xx, Padang, Sumatera Barat', 'Nama User 01', 4, 2, 'Kabid Kepabeanan dan Cukai', 'Penata Muda Tingkat I/III B'),
+('1234567802', 'admin', 'admin', '1980-03-02', 'Jl. Mayjend Panjaitan, No.xx, Padang, Sumatera Barat', 'Nama Admin Root', 1, 1, '', ''),
+('1234567803', 'admin_humas', 'admin_humas', '1980-03-10', 'Jl. Mayjend Panjaitan, No.xx, Padang, Sumatera Barat', 'Nama Admin Humas', 2, 3, '', ''),
+('1234567804', 'admin_rt', 'admin_rt', '1980-03-02', 'Jl. Mayjend Panjaitan, No.xx, Padang, Sumatera Barat', 'Nama Admin RT', 3, 5, '', '');
 
 -- --------------------------------------------------------
 
@@ -431,7 +498,9 @@ CREATE TABLE `video` (
   `file_video` blob NOT NULL,
   `tanggal_upload` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `nip` varchar(16) NOT NULL,
-  `deskripsi` text NOT NULL
+  `deskripsi` text NOT NULL,
+  `read_status` varchar(10) NOT NULL,
+  `path_video` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -574,6 +643,12 @@ ALTER TABLE `video`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `artikel`
+--
+ALTER TABLE `artikel`
+  MODIFY `id_artikel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT untuk tabel `bidang_bagian`
 --
 ALTER TABLE `bidang_bagian`
@@ -583,19 +658,25 @@ ALTER TABLE `bidang_bagian`
 -- AUTO_INCREMENT untuk tabel `foto`
 --
 ALTER TABLE `foto`
-  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT untuk tabel `jabatan`
 --
 ALTER TABLE `jabatan`
-  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT untuk tabel `kritik_saran`
 --
 ALTER TABLE `kritik_saran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `permintaan_atk`
+--
+ALTER TABLE `permintaan_atk`
+  MODIFY `id_permintaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `permohonan_rumah`
@@ -607,7 +688,7 @@ ALTER TABLE `permohonan_rumah`
 -- AUTO_INCREMENT untuk tabel `permohonan_service`
 --
 ALTER TABLE `permohonan_service`
-  MODIFY `id_permohonan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_permohonan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `rumah_dinas`
