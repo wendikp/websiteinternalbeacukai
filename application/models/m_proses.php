@@ -3,20 +3,23 @@
 if (!defined('BASEPATH')) exit('No direct script acces allowed');
 
 /**
-* 
-*/
-class M_proses extends CI_Model {
+ * 
+ */
+class M_proses extends CI_Model
+{
 
 	protected $table_artikel = 'artikel';
 	protected $table_foto = 'foto';
 
-	public function __construct() {
+	public function __construct()
+	{
 		parent::__construct();
 		$this->load->database();
 	}
 
-	public function insert_admin($params){
-		$nip = rand(500,1000000000000);
+	public function insert_admin($params)
+	{
+		$nip = rand(500, 1000000000000);
 
 		$fields = array(
 			'nip'       => $nip,
@@ -25,12 +28,13 @@ class M_proses extends CI_Model {
 			'nama_lkp'  => "",
 			'id_status' => $params['status'],
 			'id_bidang' => 6
-			);
+		);
 		$this->db->insert('user', $fields);
 	}
 
-	public function insert_user($params){
-		
+	public function insert_user($params)
+	{
+
 		$fields = array(
 			'nip'       => $params['nip'],
 			'username'  => $params['user'],
@@ -42,11 +46,12 @@ class M_proses extends CI_Model {
 			'alamat'    => $params['alamat'],
 			'jabatan'   => $params['jabatan'],
 			'golongan'  => $params['gol']
-			);
+		);
 		$this->db->insert('user', $fields);
 	}
 
-	public function insert_artikel($params){
+	public function insert_artikel($params)
+	{
 		//mengambil nip user yg login
 		$user = $this->session->userdata('username');
 		$query = mysql_query("SELECT nip FROM user WHERE username = '$user'");
@@ -72,7 +77,7 @@ class M_proses extends CI_Model {
 			'tanggal_upload' => date('Y-m-d'),
 			'nip'            => $nip,
 			'read_status'    => "true"
-			);
+		);
 
 		//insert ke tabel foto
 		$this->db->insert($this->table_foto, $fields_foto);
@@ -97,14 +102,14 @@ class M_proses extends CI_Model {
 			'nip' => $nip,
 			'id_foto' => $id_foto,
 			'tanggal_upload' => date('Y-m-d')
-			);
+		);
 
 		//insert ke tabel artikel
 		$this->db->insert($this->table_artikel, $fields_artikel);
-		
 	}
 
-	public function insert_foto($params){
+	public function insert_foto($params)
+	{
 		//mengambil nip user yg login
 		$user = $this->session->userdata('username');
 		$query = mysql_query("SELECT nip FROM user WHERE username = '$user'");
@@ -116,10 +121,11 @@ class M_proses extends CI_Model {
 			'path_foto'      => $params['targetPath'],
 			'tanggal_upload' => date('Y-m-d'),
 			'nip'            => $nip
-			);
+		);
 	}
 
-	public function insert_video($params){
+	public function insert_video($params)
+	{
 		//mengambil nip user yg login
 		$user = $this->session->userdata('username');
 		$query = mysql_query("SELECT nip FROM user WHERE username = '$user'");
@@ -145,15 +151,15 @@ class M_proses extends CI_Model {
 			'tanggal_upload' => date('Y-m-d H:i:s'),
 			'nip' => $nip,
 			'deskripsi' => $params['deskripsi']
-			);
+		);
 
 		//insert ke tabel foto
 		$this->db->insert('video', $fields);
-
 	}
 
 	//rumah tangga
-	public function insert_permohonan_hunian($params){
+	public function insert_permohonan_hunian($params)
+	{
 		//mengambil nip user yg login
 		$user = $this->session->userdata('username');
 		$query = mysql_query("SELECT nip FROM user WHERE username = '$user'");
@@ -171,7 +177,7 @@ class M_proses extends CI_Model {
 			$id = $cek['id_permohonan'] + 1;
 		}
 
-			//memasukan data ke tabel permohonan_rumah
+		//memasukan data ke tabel permohonan_rumah
 		$fields = array(
 			'id_permohonan' => $id,
 			'id_jenis_permohonan' => 1,
@@ -179,15 +185,14 @@ class M_proses extends CI_Model {
 			'nip' => $nip,
 			'tgl_mohon' => $params['tglmohon'],
 			'tgl_upload' => date('Y-m-d H:i:s')
-			);
+		);
 
-			//insert ke tabel permohonan_rumah
+		//insert ke tabel permohonan_rumah
 		$this->db->insert('permohonan_rumah', $fields);
-
-		
 	}
 
-	public function insert_permohonan_cabut_hunian($params){
+	public function insert_permohonan_cabut_hunian($params)
+	{
 		//mengambil nip user yg login
 		$user = $this->session->userdata('username');
 		$query = mysql_query("SELECT nip FROM user WHERE username = '$user'");
@@ -213,14 +218,14 @@ class M_proses extends CI_Model {
 			'nip' => $nip,
 			'tgl_mohon' => $params['tglmohon'],
 			'tgl_upload' => date('Y-m-d H:i:s')
-			);
+		);
 
 		//insert ke tabel permohonan_rumah
 		$this->db->insert('permohonan_rumah', $fields);
-		
 	}
 
-	public function insert_permohonan_service_kbd2($params){
+	public function insert_permohonan_service_kbd2($params)
+	{
 		//mengambil nip user yg login
 		$user = $this->session->userdata('username');
 		$query = mysql_query("SELECT nip FROM user WHERE username = '$user'");
@@ -247,13 +252,14 @@ class M_proses extends CI_Model {
 			'tgl_mohon' => $params['tglmohon'],
 			'plat_nomor' => $params['platno'],
 			'tgl_upload' => date('Y-m-d H:i:s')
-			);
+		);
 
 		//insert ke tabel permohonan_rumah
-		$this->db->insert('permohonan_service', $fields);		
+		$this->db->insert('permohonan_service', $fields);
 	}
 
-	public function insert_permohonan_service_kbd4($params){
+	public function insert_permohonan_service_kbd4($params)
+	{
 		//mengambil nip user yg login
 		$user = $this->session->userdata('username');
 		$query = mysql_query("SELECT nip FROM user WHERE username = '$user'");
@@ -280,13 +286,14 @@ class M_proses extends CI_Model {
 			'tgl_mohon' => $params['tglmohon'],
 			'plat_nomor' => $params['platno'],
 			'tgl_upload' => date('Y-m-d H:i:s')
-			);
+		);
 
 		//insert ke tabel permohonan_rumah
-		$this->db->insert('permohonan_service', $fields);		
+		$this->db->insert('permohonan_service', $fields);
 	}
 
-	public function insert_kritiksaran($params){
+	public function insert_kritiksaran($params)
+	{
 		//mengambil nip user yg login
 		$user = $this->session->userdata('username');
 		$query = mysql_query("SELECT nip FROM user WHERE username = '$user'");
@@ -311,35 +318,38 @@ class M_proses extends CI_Model {
 			'perihal'      => $params['perihal'],
 			'nip'          => $nip
 			//'tanggal'      => date('Y-m-d h:i:sa')
-			);
+		);
 
 		//insert ke tabel permohonan_rumah
-		$this->db->insert('kritik_saran', $fields);		
+		$this->db->insert('kritik_saran', $fields);
 	}
 
-	public function insert_riwayatServiceKBD2($params){
+	public function insert_riwayatServiceKBD2($params)
+	{
 		$fields = array(
 			'nopol'        => $params['nopol'],
 			'tanggal'      => $params['tgl'],
 			'keterangan'   => $params['ket'],
 			'id_jenis_kbd' => 1
-			);
+		);
 
 		$this->db->insert('riwayat_service', $fields);
 	}
 
-	public function insert_riwayatServiceKBD4($params){
+	public function insert_riwayatServiceKBD4($params)
+	{
 		$fields = array(
 			'nopol'        => $params['nopol'],
 			'tanggal'      => $params['tgl'],
 			'keterangan'   => $params['ket'],
 			'id_jenis_kbd' => 2
-			);
+		);
 
-		$this->db->insert('riwayat_service', $fields);	
+		$this->db->insert('riwayat_service', $fields);
 	}
 
-	public function insert_KBD2($params){
+	public function insert_KBD2($params)
+	{
 		//mengambil data id_foto
 		$hasil = mysql_query('SELECT id_foto FROM foto ORDER BY id_foto DESC LIMIT 1');
 		$cek = mysql_fetch_array($hasil);
@@ -358,7 +368,7 @@ class M_proses extends CI_Model {
 			'path_foto'      => $params['path_foto'],
 			'tanggal_upload' => date('Y-m-d'),
 			'nip'            => NULL
-			);
+		);
 
 		//insert ke tabel foto
 		$this->db->insert('foto', $fields_foto);
@@ -371,14 +381,14 @@ class M_proses extends CI_Model {
 			'nomor_kep' => $params['nomorkep'],
 			'id_jenis_kbd' => 1,
 			'id_foto' => $id_foto
-			);
+		);
 
 		//insert ke tabel artikel
 		$this->db->insert('kbd', $fields_kbd);
-		
 	}
 
-	public function insert_KBD4($params){
+	public function insert_KBD4($params)
+	{
 		//mengambil data id_foto
 		$hasil = mysql_query('SELECT id_foto FROM foto ORDER BY id_foto DESC LIMIT 1');
 		$cek = mysql_fetch_array($hasil);
@@ -397,7 +407,7 @@ class M_proses extends CI_Model {
 			'path_foto'      => $params['path_foto'],
 			'tanggal_upload' => date('Y-m-d'),
 			'nip'            => NULL
-			);
+		);
 
 		//insert ke tabel foto
 		$this->db->insert('foto', $fields_foto);
@@ -410,24 +420,25 @@ class M_proses extends CI_Model {
 			'nomor_kep' => $params['nomorkep'],
 			'id_jenis_kbd' => 2,
 			'id_foto' => $id_foto
-			);
+		);
 
 		//insert ke tabel artikel
 		$this->db->insert('kbd', $fields_kbd);
-		
 	}
 
-	public function insert_ATK($params){
+	public function insert_ATK($params)
+	{
 		$fields = array(
 			'atk'          => $params['atk'],
 			'ketersediaan' => $params['ketersediaan'],
 			'satuan'       => $params['satuan']
-			);
+		);
 
 		$this->db->insert('atk', $fields);
 	}
 
-	public function insert_rumah($params){
+	public function insert_rumah($params)
+	{
 		//mengambil data id_foto
 		$hasil = mysql_query('SELECT id_foto FROM foto ORDER BY id_foto DESC LIMIT 1');
 		$cek = mysql_fetch_array($hasil);
@@ -446,7 +457,7 @@ class M_proses extends CI_Model {
 			'path_foto'      => $params['path_foto'],
 			'tanggal_upload' => date('Y-m-d'),
 			'nip'            => NULL
-			);
+		);
 
 		//insert ke tabel foto
 		$this->db->insert('foto', $fields_foto);
@@ -460,20 +471,20 @@ class M_proses extends CI_Model {
 			'penghuni'   => $params['penghuni'],
 			'keterangan' => $params['ket'],
 			'id_foto'    => $id_foto
-			);
+		);
 
 		//insert ke tabel artikel
 		$this->db->insert('rumah_dinas', $fields_rumah);
-		
 	}
 
 	//=========================================================================
 	//===================| untuk menampilkan data |============================
 	//=========================================================================
 
-	
 
-	public function select_daftarAdmin(){
+
+	public function select_daftarAdmin()
+	{
 		$data = $this->db->query("
 			SELECT nip, username, password, status FROM user u, status s 
 			WHERE u.id_bidang = 6 AND
@@ -482,7 +493,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarUser(){
+	public function select_daftarUser()
+	{
 		$data = $this->db->query("
 			SELECT nip, nama_lkp, bagian, tgl_lhr, alamat, username, password, jabatan, golongan FROM user u, bidang_bagian b 
 			WHERE u.id_status = 4 && u.id_bidang = b.id_bidang
@@ -490,28 +502,32 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_perumahan_araya(){
+	public function select_perumahan_araya()
+	{
 		$data = $this->db->query("
 			SELECT id_rumah, r.id_foto, path_foto, id_listrik, id_pdam, lokasi, alamat, penghuni, keterangan FROM foto f, rumah_dinas
 			WHERE f.id_foto = r.id_foto and lokasi = 'araya'");
 		return $data->result();
 	}
 
-	public function select_perumahan_pakisjajar(){
+	public function select_perumahan_pakisjajar()
+	{
 		$data = $this->db->query("
 			SELECT id_rumah, path_foto, id_listrik, id_pdam, lokasi, alamat, penghuni, keterangan FROM foto f, rumah_dinas r 
 			WHERE f.id_foto = r.id_foto and lokasi = 'pakisjajar'");
 		return $data->result();
 	}
 
-	public function select_rumahDinas($id){
+	public function select_rumahDinas($id)
+	{
 		$data = $this->db->query("
 			SELECT * FROM rumah_dinas WHERE id_rumah = $id
 			");
 		return $data->result();
 	}
 
-	public function select_daftarMotor(){
+	public function select_daftarMotor()
+	{
 		$data = $this->db->query("
 			SELECT 
 			    (SELECT COUNT(*) FROM permintaan_atk WHERE read_status = 'false') as read_stts_atk,
@@ -528,7 +544,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_KBD($nopol){
+	public function select_KBD($nopol)
+	{
 		$data = $this->db->query("
 			SELECT
 			    nopol, merek, pic_kbd, nomor_kep, id_jenis_kbd, id_foto 
@@ -538,7 +555,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_nopolKBD2(){
+	public function select_nopolKBD2()
+	{
 		$data = $this->db->query("
 			SELECT
 			    nopol FROM kbd WHERE id_jenis_kbd = 1
@@ -547,7 +565,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_nopol($nopol){
+	public function select_nopol($nopol)
+	{
 		$data = $this->db->query("
 			SELECT
 			    nopol FROM kbd WHERE nopol = '$nopol'
@@ -556,7 +575,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_nopolKBD4(){
+	public function select_nopolKBD4()
+	{
 		$data = $this->db->query("
 			SELECT
 			    nopol FROM kbd WHERE id_jenis_kbd = 2
@@ -565,7 +585,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarMobil(){
+	public function select_daftarMobil()
+	{
 		$data = $this->db->query("
 			SELECT 
 			    (SELECT COUNT(*) FROM permintaan_atk WHERE read_status = 'false') as read_stts_atk,
@@ -582,7 +603,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function selectDashboardHumas(){
+	public function selectDashboardHumas()
+	{
 		$data = $this->db->query("
 			SELECT 
 			    (SELECT COUNT(*) FROM artikel WHERE read_status = 'false') as read_stts_artikel,
@@ -595,7 +617,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function selectDashboardRT(){
+	public function selectDashboardRT()
+	{
 		$data = $this->db->query("
 			SELECT 
 			    (SELECT COUNT(*) FROM permintaan_atk WHERE read_status = 'false') as read_stts_atk,
@@ -616,7 +639,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarArtikel(){
+	public function select_daftarArtikel()
+	{
 		$data = $this->db->query("
 			SELECT id_artikel, judul, penulis, bagian, concat(day(a.tanggal_upload),' ',monthname(a.tanggal_upload),' ',year(a.tanggal_upload)) as tanggal_up, status, path_foto, penulis, judul, a.read_status
 			    FROM bidang_bagian b, artikel a, user u, foto f
@@ -628,7 +652,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarPermintaanATK(){
+	public function select_daftarPermintaanATK()
+	{
 		$data = $this->db->query("
 			SELECT 
 			    id_permintaan, kode, nosurat, pa.nip, nama_lkp, bagian, tanggal_permohonan, status, read_status 
@@ -640,7 +665,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_dataPermintaanATK($nosurat){
+	public function select_dataPermintaanATK($nosurat)
+	{
 		$data = $this->db->query("
 			SELECT 
 			    id_permintaan, nosurat, barang, satuan, volume, p.nip, tanggal_permohonan, status, nama_lkp, jabatan, golongan, UPPER(bagian) as bagian
@@ -650,7 +676,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarFoto(){
+	public function select_daftarFoto()
+	{
 		$this->db->query("
 			UPDATE foto SET read_status = 'true'
 			");
@@ -664,7 +691,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_viewFoto(){
+	public function select_viewFoto()
+	{
 		$data = $this->db->query("
 			SELECT 
 			    path_foto from foto
@@ -672,7 +700,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarVideo(){
+	public function select_daftarVideo()
+	{
 		$data = $this->db->query("
 			SELECT 
 			    id_video, path_video, file_name, concat(day(tanggal_upload),' ',monthname(tanggal_upload),' ',year(tanggal_upload)) as tanggal_upload, nama_lkp, bagian, deskripsi, read_status FROM video v, user u, bidang_bagian b WHERE u.nip = v.nip && u.id_bidang = b.id_bidang 
@@ -681,7 +710,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarPermohonanRumahDinas(){
+	public function select_daftarPermohonanRumahDinas()
+	{
 		$data = $this->db->query("
 			SELECT 
 			    id_permohonan, no_surat, nama_lkp, p.nip, bagian, concat(day(tgl_mohon),' ',monthname(tgl_mohon),' ',year(tgl_mohon)) as tanggal, status, read_status
@@ -696,7 +726,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarPermohonanCabutIzinHunian(){
+	public function select_daftarPermohonanCabutIzinHunian()
+	{
 		$data = $this->db->query("
 			SELECT 
 			    id_permohonan, no_surat, nama_lkp, p.nip, bagian, concat(day(tgl_mohon),' ',monthname(tgl_mohon),' ',year(tgl_mohon)) as tgl_mohon, concat(day(tgl_upload),' ',monthname(tgl_upload),' ',year(tgl_upload)) as tgl_upload, status, read_status FROM permohonan_rumah p, user u, bidang_bagian b 
@@ -710,7 +741,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarPermohonanServisRoda2(){
+	public function select_daftarPermohonanServisRoda2()
+	{
 		$data = $this->db->query("
 			SELECT
 			    id_permohonan, status, no_surat, nama_lkp, p.nip, bagian, concat(day(tgl_mohon),' ',monthname(tgl_mohon),' ',year(tgl_mohon)) as tgl_mohon, concat(day(tgl_upload),' ',monthname(tgl_upload),' ',year(tgl_upload)) as tgl_upload, read_status
@@ -726,7 +758,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarPermohonanServisRoda4(){
+	public function select_daftarPermohonanServisRoda4()
+	{
 		$data = $this->db->query("
 			SELECT 
 			    id_permohonan, status, no_surat, nama_lkp, p.nip, bagian, concat(day(tgl_mohon),' ',monthname(tgl_mohon),' ',year(tgl_mohon)) as tgl_mohon, concat(day(tgl_upload),' ',monthname(tgl_upload),' ',year(tgl_upload)) as tgl_upload, read_status
@@ -740,7 +773,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarPermohonanInventaris(){
+	public function select_daftarPermohonanInventaris()
+	{
 		$data = $this->db->query("
 			SELECT
 			    id_permohonan, status, no_surat, nama_lkp, p.nip, bagian, concat(day(tgl_mohon),' ',monthname(tgl_mohon),' ',year(tgl_mohon)) as tgl_mohon, concat(day(tgl_upload),' ',monthname(tgl_upload),' ',year(tgl_upload)) as tgl_upload 
@@ -754,7 +788,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarServiceRoda2(){
+	public function select_daftarServiceRoda2()
+	{
 		$data = $this->db->query("
 			SELECT 
 			    id_service, a.nopol, concat(day(MAX(a.tanggal)),' ',monthname(MAX(a.tanggal)),' ',year(MAX(a.tanggal))) as tanggal, keterangan FROM (SELECT * FROM riwayat_service ORDER BY tanggal DESC) a WHERE id_jenis_kbd = 1 GROUP BY a.nopol
@@ -762,7 +797,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarServiceRoda4(){
+	public function select_daftarServiceRoda4()
+	{
 		$data = $this->db->query("
 			SELECT 
 			    id_service, a.nopol, concat(day(MAX(a.tanggal)),' ',monthname(MAX(a.tanggal)),' ',year(MAX(a.tanggal))) as tanggal, keterangan FROM (SELECT * FROM riwayat_service ORDER BY tanggal DESC) a WHERE id_jenis_kbd = 2 GROUP BY a.nopol
@@ -770,7 +806,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarKritikSaran(){
+	public function select_daftarKritikSaran()
+	{
 		$data = $this->db->query("
 			SELECT  
 			    nama_lkp, perihal, concat(day(tanggal),' ',monthname(tanggal),' ',year(tanggal), ' | ', hour(tanggal),':',minute(tanggal),':',second(tanggal)) as tanggal, id, read_status FROM user u, kritik_saran k 
@@ -780,7 +817,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_kritiksaran($idKritik){
+	public function select_kritiksaran($idKritik)
+	{
 		$this->db->query("
 			UPDATE kritik_saran SET read_status = 'true' WHERE id = '$idKritik'
 			");
@@ -799,21 +837,24 @@ class M_proses extends CI_Model {
 	// 	return $data->result();
 	// }
 
-	public function selectNopol($id){
+	public function selectNopol($id)
+	{
 		$data = $this->db->query("
 			SELECT * FROM riwayat_service WHERE id_service = $id
 			");
 		return $data->result();
 	}
 
-	public function selectData($nip){
+	public function selectData($nip)
+	{
 		$data = $this->db->query("
 			SELECT UPPER(bagian) as bagian, nama_lkp, nip, jabatan, golongan FROM bidang_bagian b, user u WHERE nip = $nip && u.id_bidang = b.id_bidang
 			");
 		return $data->result();
 	}
 
-	public function selectDataService($id){
+	public function selectDataService($id)
+	{
 		$data = $this->db->query("
 			SELECT
 			    id_service, nopol, tanggal, keterangan, id_jenis_kbd FROM riwayat_service WHERE id_service = $id
@@ -821,21 +862,24 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function selectDataAdmin($nip){
+	public function selectDataAdmin($nip)
+	{
 		$data = $this->db->query("
 			SELECT nip, username, password, id_status, id_bidang FROM user WHERE nip = $nip
 			");
 		return $data->result();
 	}
 
-	public function selectDataUser($nip){
+	public function selectDataUser($nip)
+	{
 		$data = $this->db->query("
 			SELECT nip, username, password, nama_lkp, alamat, tgl_lhr FROM user WHERE nip = $nip
 			");
 		return $data->result();
 	}
 
-	public function selectPermohonanHunian($id){
+	public function selectPermohonanHunian($id)
+	{
 		$data = $this->db->query("
 			SELECT 
 			    id_permohonan, no_surat, p.nip, tgl_mohon, status, nama_lkp, jabatan, golongan, bagian 
@@ -845,14 +889,16 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function select_daftarATK(){
+	public function select_daftarATK()
+	{
 		$data = $this->db->query("
 			SELECT * FROM atk
 		");
 		return $data->result();
 	}
 
-	public function select_ATK($id){
+	public function select_ATK($id)
+	{
 		$data = $this->db->query("
 			SELECT * FROM atk WHERE id_atk = '$id'
 			");
@@ -863,97 +909,113 @@ class M_proses extends CI_Model {
 	//                          DELETE
 	//==========================================================
 
-	public function delete_kritikSaran($id){
+	public function delete_kritikSaran($id)
+	{
 		$this->db->query("
 			DELETE FROM kritik_saran WHERE id = $id
 			");
 	}
 
-	public function delete_izinHunian($id){
+	public function delete_izinHunian($id)
+	{
 		$this->db->query("
 			DELETE FROM permohonan_rumah WHERE id_permohonan = $id
 			");
 	}
 
-	public function delete_artikel($id){
+	public function delete_artikel($id)
+	{
 		$this->db->query("
 			DELETE FROM artikel WHERE id_artikel = $id
 			");
 	}
 
-	public function deletePhoto($id){
+	public function deletePhoto($id)
+	{
 		$this->db->query("
 			DELETE FROM foto WHERE id_foto = $id
 			");
 	}
 
-	public function deleteVideo($id){
+	public function deleteVideo($id)
+	{
 		$this->db->query("
 			DELETE FROM video WHERE id_video = $id
 			");
 	}
 
-	public function deletePermohonanServiceKBD2($id){
+	public function deletePermohonanServiceKBD2($id)
+	{
 		$this->db->query("
 			DELETE FROM permohonan_service WHERE id_permohonan = $id
 			");
 	}
 
-	public function deletePermohonanServiceKBD4($id){
+	public function deletePermohonanServiceKBD4($id)
+	{
 		$this->db->query("
 			DELETE FROM permohonan_service WHERE id_permohonan = $id
 			");
 	}
 
-	public function deleteDetailServiceKBD2($id){
+	public function deleteDetailServiceKBD2($id)
+	{
 		$this->db->query("
 			DELETE FROM riwayat_service WHERE id_service = $id
 			");
 	}
 
-	public function deleteDetailServiceKBD4($id){
+	public function deleteDetailServiceKBD4($id)
+	{
 		$this->db->query("
 			DELETE FROM riwayat_service WHERE id_service = $id
 			");
 	}
 
-	public function deleteInfoMotor($nopol){
+	public function deleteInfoMotor($nopol)
+	{
 		$this->db->query("
 			DELETE FROM kbd WHERE nopol = '$nopol'
 			");
 	}
 
-	public function deleteInfoMobil($nopol){
+	public function deleteInfoMobil($nopol)
+	{
 		$this->db->query("
 			DELETE FROM kbd WHERE nopol = '$nopol'
 			");
 	}
 
-	public function deleteAdmin($nip){
+	public function deleteAdmin($nip)
+	{
 		$this->db->query("
 			DELETE FROM user WHERE nip = '$nip'
 			");
 	}
 
-	public function delete_permintaanATK($nosurat){
+	public function delete_permintaanATK($nosurat)
+	{
 		$this->db->query("
 			DELETE FROM permintaan_atk WHERE nosurat = '$nosurat'
 			");
 	}
 
-	public function delete_ATK($id){
+	public function delete_ATK($id)
+	{
 		$this->db->query("
 			DELETE FROM permintaan_atk WHERE id_permintaan = $id
 			");
 	}
 
-	public function delete_ATKdiDaftar($id){
+	public function delete_ATKdiDaftar($id)
+	{
 		$this->db->query("
 			DELETE FROM atk WHERE id_atk = $id
 			");
 	}
 
-	public function deleteInfoRumahDinas($id){
+	public function deleteInfoRumahDinas($id)
+	{
 		$this->db->query("
 			DELETE FROM rumah_dinas WHERE id_rumah = '$id'
 			");
@@ -962,7 +1024,8 @@ class M_proses extends CI_Model {
 	//==========================================================
 	//                          VIEW
 	//==========================================================
-	public function viewArtikel($id){
+	public function viewArtikel($id)
+	{
 		$this->db->query("
 			UPDATE artikel SET read_status = 'true' WHERE id_artikel = $id;
 			");
@@ -973,7 +1036,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function viewPhoto($id){
+	public function viewPhoto($id)
+	{
 		$data = $this->db->query("
 			SELECT 
 			    path_foto FROM foto 
@@ -982,7 +1046,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function viewVideo($id){
+	public function viewVideo($id)
+	{
 		$this->db->query("
 			UPDATE video SET read_status = 'true' WHERE id_video = $id
 			");
@@ -994,7 +1059,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function viewIzinHunian($id){
+	public function viewIzinHunian($id)
+	{
 		$this->db->query("
 			UPDATE permohonan_rumah SET read_status = 'true' WHERE id_permohonan = $id
 			");
@@ -1007,7 +1073,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function viewPermohonanService($id){
+	public function viewPermohonanService($id)
+	{
 		$this->db->query("
 			UPDATE permohonan_service SET read_status = 'true' WHERE id_permohonan = $id
 			");
@@ -1020,7 +1087,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function editPermintaanATK($kode){
+	public function editPermintaanATK($kode)
+	{
 		$this->db->query("
 			UPDATE permintaan_atk SET read_status = 'true' WHERE kode = '$kode'
 			");
@@ -1033,7 +1101,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function detailRiwayatServiceKBD2($nopol){
+	public function detailRiwayatServiceKBD2($nopol)
+	{
 		$data = $this->db->query("
 			SELECT
 			    id_service, nopol, tanggal, keterangan, id_jenis_kbd FROM riwayat_service
@@ -1042,7 +1111,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function detailRiwayatServiceKBD4($nopol){
+	public function detailRiwayatServiceKBD4($nopol)
+	{
 		$data = $this->db->query("
 			SELECT
 			    id_service, nopol, tanggal, keterangan, id_jenis_kbd FROM riwayat_service
@@ -1051,7 +1121,8 @@ class M_proses extends CI_Model {
 		return $data->result();
 	}
 
-	public function detailRiwayatServiceKBD2afterUpdate($id){
+	public function detailRiwayatServiceKBD2afterUpdate($id)
+	{
 		$data = $this->db->query("
 			SELECT * FROM riwayat_service
 			WHERE nopol = (SELECT nopol FROM riwayat_service WHERE id_service = $id)
@@ -1063,91 +1134,104 @@ class M_proses extends CI_Model {
 	//                          UPDATE
 	//==========================================================
 
-	public function undoApprovalArtikel($id){
+	public function undoApprovalArtikel($id)
+	{
 		$this->db->query("
 			UPDATE artikel SET status='Not Approved'
 			WHERE id_artikel = $id
 			");
 	}
 
-	public function approveArtikel($id){
+	public function approveArtikel($id)
+	{
 		$this->db->query("
 			UPDATE artikel SET status='Approved'
 			WHERE id_artikel = $id
 			");
 	}
 
-	public function undoApprovalIzinHunian($id){
+	public function undoApprovalIzinHunian($id)
+	{
 		$this->db->query("
 			UPDATE permohonan_rumah SET status='Not Approved'
 			WHERE id_permohonan = $id
 			");
 	}
 
-	public function approveIzinHunian($id){
+	public function approveIzinHunian($id)
+	{
 		$this->db->query("
 			UPDATE permohonan_rumah SET status='Approved'
 			WHERE id_permohonan = $id
 			");
 	}
 
-	public function undoApprovalCabutIzinHunian($id){
+	public function undoApprovalCabutIzinHunian($id)
+	{
 		$this->db->query("
 			UPDATE permohonan_rumah SET status='Not Approved'
 			WHERE id_permohonan = $id
 			");
 	}
 
-	public function approveCabutIzinHunian($id){
+	public function approveCabutIzinHunian($id)
+	{
 		$this->db->query("
 			UPDATE permohonan_rumah SET status='Approved'
 			WHERE id_permohonan = $id
 			");
 	}
 
-	public function undoApprovalPermohonanServiceKBD2($id){
+	public function undoApprovalPermohonanServiceKBD2($id)
+	{
 		$this->db->query("
 			UPDATE permohonan_service SET status='Not Approved'
 			WHERE id_permohonan = $id
 			");
 	}
 
-	public function approvePermohonanServiceKBD2($id){
+	public function approvePermohonanServiceKBD2($id)
+	{
 		$this->db->query("
 			UPDATE permohonan_service SET status='Approved'
 			WHERE id_permohonan = $id
 			");
 	}
 
-	public function undoApprovalPermohonanServiceKBD4($id){
+	public function undoApprovalPermohonanServiceKBD4($id)
+	{
 		$this->db->query("
 			UPDATE permohonan_service SET status='Not Approved'
 			WHERE id_permohonan = $id
 			");
 	}
 
-	public function approvePermohonanServiceKBD4($id){
+	public function approvePermohonanServiceKBD4($id)
+	{
 		$this->db->query("
 			UPDATE permohonan_service SET status='Approved'
 			WHERE id_permohonan = $id
 			");
 	}
 
-	public function undoApprovalPermintaanATK($nosurat){
+	public function undoApprovalPermintaanATK($nosurat)
+	{
 		$this->db->query("
 			UPDATE permintaan_atk SET status='Not Approved'
 			WHERE nosurat = '$nosurat'
 			");
 	}
 
-	public function approvePermintaanATK($nosurat){
+	public function approvePermintaanATK($nosurat)
+	{
 		$this->db->query("
 			UPDATE permintaan_atk SET status='Approved'
 			WHERE nosurat = '$nosurat'
 			");
 	}
 
-	public function updateRiwayatKBD2($params){
+	public function updateRiwayatKBD2($params)
+	{
 		$tgl = $params['tgl'];
 		$ket = $params['ket'];
 		$id  = $params['id'];
@@ -1157,7 +1241,8 @@ class M_proses extends CI_Model {
 			");
 	}
 
-	public function updateRiwayatKBD4($params){
+	public function updateRiwayatKBD4($params)
+	{
 		$tgl = $params['tgl'];
 		$ket = $params['ket'];
 		$id  = $params['id'];
@@ -1167,28 +1252,29 @@ class M_proses extends CI_Model {
 			");
 	}
 
-	public function updateInfoMotor($params){
+	public function updateInfoMotor($params)
+	{
 		//$foto      = $params['foto'];
 		$merek     = $params['merek'];
 		$pic       = $params['pic'];
 		$nomorkep  = $params['nomorkep'];
 		$nopol     = $params['nopol'];
 		$path_foto = $params['path_foto'];
-		
+
 
 		if ($path_foto != NULL) {
 			//mengambil data id_foto
 			$hasil = mysql_query('SELECT id_foto FROM foto ORDER BY id_foto DESC LIMIT 1');
 			$cek = mysql_fetch_array($hasil);
 
-		    //melakukan pengecekan untuk id_foto sekaligus inisialisasi
+			//melakukan pengecekan untuk id_foto sekaligus inisialisasi
 			if ($cek['id_foto'] == NULL) {
 				$id_foto = 1;
 			} else {
 				$id_foto = $cek['id_foto'] + 1;
 			}
 
-		    //memasukan data ke tabel foto
+			//memasukan data ke tabel foto
 			$fields_foto = array(
 				'id_foto'        => $id_foto,
 				'file_name'      => $params['filename'],
@@ -1196,9 +1282,9 @@ class M_proses extends CI_Model {
 				'tanggal_upload' => date('Y-m-d'),
 				'nip'            => NULL,
 				'read_status'    => "true"
-				);
+			);
 
-		    //insert ke tabel foto
+			//insert ke tabel foto
 			$this->db->insert('foto', $fields_foto);
 
 
@@ -1225,28 +1311,29 @@ class M_proses extends CI_Model {
 		}
 	}
 
-	public function updateInfoMobil($params){
+	public function updateInfoMobil($params)
+	{
 		//$foto      = $params['foto'];
 		$merek     = $params['merek'];
 		$pic       = $params['pic'];
 		$nomorkep  = $params['nomorkep'];
 		$nopol     = $params['nopol'];
 		$path_foto = $params['path_foto'];
-		
+
 
 		if ($path_foto != NULL) {
 			//mengambil data id_foto
 			$hasil = mysql_query('SELECT id_foto FROM foto ORDER BY id_foto DESC LIMIT 1');
 			$cek = mysql_fetch_array($hasil);
 
-		    //melakukan pengecekan untuk id_foto sekaligus inisialisasi
+			//melakukan pengecekan untuk id_foto sekaligus inisialisasi
 			if ($cek['id_foto'] == NULL) {
 				$id_foto = 1;
 			} else {
 				$id_foto = $cek['id_foto'] + 1;
 			}
 
-		    //memasukan data ke tabel foto
+			//memasukan data ke tabel foto
 			$fields_foto = array(
 				'id_foto'        => $id_foto,
 				'file_name'      => $params['filename'],
@@ -1254,9 +1341,9 @@ class M_proses extends CI_Model {
 				'tanggal_upload' => date('Y-m-d'),
 				'nip'            => NULL,
 				'read_status'    => "true"
-				);
+			);
 
-		    //insert ke tabel foto
+			//insert ke tabel foto
 			$this->db->insert('foto', $fields_foto);
 
 
@@ -1283,7 +1370,8 @@ class M_proses extends CI_Model {
 		}
 	}
 
-	public function updateDataAdmin($params){
+	public function updateDataAdmin($params)
+	{
 		$user   = $params['user'];
 		$pwd    = $params['pwd'];
 		$status = $params['status'];
@@ -1295,7 +1383,8 @@ class M_proses extends CI_Model {
 	    ");
 	}
 
-	public function updateDataUser($params){
+	public function updateDataUser($params)
+	{
 		$user      = $params['user'];
 		$pwd       = $params['pwd'];
 		$status    = $params['status'];
@@ -1322,7 +1411,8 @@ class M_proses extends CI_Model {
 	    ");
 	}
 
-	public function updateDaftarATK($params){
+	public function updateDaftarATK($params)
+	{
 		$atk = $params['atk'];
 		$stok = $params['stok'];
 		$id  = $params['id'];
@@ -1332,7 +1422,8 @@ class M_proses extends CI_Model {
 			");
 	}
 
-	public function updateInfoRumahDinas($params){
+	public function updateInfoRumahDinas($params)
+	{
 		$id_rumah   = $params['id'];
 		$id_listrik = $params['id_listrik'];
 		$id_pdam    = $params['id_pdam'];
@@ -1341,21 +1432,21 @@ class M_proses extends CI_Model {
 		$penghuni   = $params['penghuni'];
 		$keterangan = $params['ket'];
 		$path_foto  = $params['path_foto'];
-		
+
 
 		if ($path_foto != NULL) {
 			//mengambil data id_foto
 			$hasil = mysql_query('SELECT id_foto FROM foto ORDER BY id_foto DESC LIMIT 1');
 			$cek = mysql_fetch_array($hasil);
 
-		    //melakukan pengecekan untuk id_foto sekaligus inisialisasi
+			//melakukan pengecekan untuk id_foto sekaligus inisialisasi
 			if ($cek['id_foto'] == NULL) {
 				$id_foto = 1;
 			} else {
 				$id_foto = $cek['id_foto'] + 1;
 			}
 
-		    //memasukan data ke tabel foto
+			//memasukan data ke tabel foto
 			$fields_foto = array(
 				'id_foto'        => $id_foto,
 				'file_name'      => $params['filename'],
@@ -1363,9 +1454,9 @@ class M_proses extends CI_Model {
 				'tanggal_upload' => date('Y-m-d'),
 				'nip'            => NULL,
 				'read_status'    => "true"
-				);
+			);
 
-		    //insert ke tabel foto
+			//insert ke tabel foto
 			$this->db->insert('foto', $fields_foto);
 
 
@@ -1399,11 +1490,11 @@ class M_proses extends CI_Model {
 	}
 
 	//=====================
-	public function cekKodePermintaanATK(){
+	public function cekKodePermintaanATK()
+	{
 		$data = $this->db->query("
 			SELECT MAX(kode) FROM permintaan_atk
 			");
 		return $data->result();
 	}
-
 }
