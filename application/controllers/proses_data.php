@@ -563,7 +563,7 @@ class Proses_data extends CI_Controller {
 		$satuan       = NULL;
 
 		extract($_POST);
-
+        
 		$params['atk']          = $atk;
 		$params['ketersediaan'] = $ketersediaan;
 		$params['satuan']       = $satuan;

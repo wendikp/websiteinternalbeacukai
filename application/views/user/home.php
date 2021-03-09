@@ -93,16 +93,16 @@
                             <hr class="intro-divider">
                             <ul class="list-inline intro-social-buttons">
                                 <li>
-                                    <a href="https://twitter.com/kwbcjatim2" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                                    <a href="https://twitter.com/kwbcjatim2" class="btn btn-default btn-lg" target="_blank"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
                                 </li>
                                 <li>
-                                    <a href="https://www.facebook.com/kanwilbcjatim2/" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
+                                    <a href="https://www.facebook.com/kanwilbcjatim2/" class="btn btn-default btn-lg" target="_blank"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
                                 </li>
                                 <li>
-                                    <a href="https://www.instagram.com/kwbcjatim2/" class="btn btn-default btn-lg"><i class="fa fa-instagram fa-fw"></i> <span class="network-name">Instagram</span></a>
+                                    <a href="https://www.instagram.com/kwbcjatim2/" class="btn btn-default btn-lg" target="_blank"><i class="fa fa-instagram fa-fw"></i> <span class="network-name">Instagram</span></a>
                                 </li>
                                 <li>
-                                    <a href="https://www.youtube.com/channel/UCaeX0BQEnIFxgTqHiQRkeYA" class="btn btn-default btn-lg"><i class="fa fa-youtube fa-fw"></i> <span class="network-name">Youtube</span></a>
+                                    <a href="https://www.youtube.com/channel/UCaeX0BQEnIFxgTqHiQRkeYA" class="btn btn-default btn-lg" target="_blank"><i class="fa fa-youtube fa-fw"></i> <span class="network-name">Youtube</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -173,8 +173,8 @@
                         <div class="clearfix"></div>
                         <h2 class="section-heading">Contact </h2>
                         <hr width="10%" align="left">
-                        <p class="lead">Email : <br/> 
-                            Telepon : </p>
+                        <p class="lead">Fax : 0341-402739<br/> 
+                            Telepon : 0341-402740</p>
                         </div>
                     </div>
 

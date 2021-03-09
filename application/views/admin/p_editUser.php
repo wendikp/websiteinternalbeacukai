@@ -188,14 +188,14 @@
                           <label for="nopol">Username</label>
                           <input type="text" class="form-control" name="user" placeholder="Username" style="width: 230px;" value="<?php echo $row->username?>">
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                           <label for="tanggal">Password</label>
                           <input type="text" class="form-control" name="pwd" placeholder="Password" style="width: 230px;" value="<?php echo $row->password?>">
-                        </div>
-                        <!-- <div class="form-group">
+                        </div> -->
+                        <div class="form-group">
                           <label for="nopol">NIP</label>
                           <input type="text" class="form-control" name="nip" placeholder="NIP" style="width: 230px;" value="<?php echo $row->nip?>">
-                        </div> -->
+                        </div>
                         <div class="form-group">
                           <label for="nopol">Nama Lengkap</label>
                           <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" style="width: 230px;" value="<?php echo $row->nama_lkp?>">
@@ -203,7 +203,7 @@
                         <div class="form-group">
                           <label for="nopol">Jabatan</label>
                           <select class="form-control" name="jabatan" style="width: 230px;" required="required">
-                            <option></option>
+                            <option value="<?php echo $row->jabatan?>"><?php echo $row->jabatan?></option>
                             <option value="Kepala Kantor">Kepala Kantor</option>
                             <option value="Kepala Bagian Umum">Kepala Bagian Umum</option>
                             <option value="Kabid Fasilitas Kepabeanan">Kabid Fasilitas Kepabeanan</option>
@@ -235,7 +235,7 @@
                         <div class="form-group">
                           <label for="nopol">Pangkat/Golongan</label>
                           <select class="form-control" name="gol" style="width: 230px;" required="required">
-                            <option></option>
+                            <option value="<?php echo $row->golongan?>"><?php echo $row->golongan?></option>
                             <option value="Pembina Utama/IV E">Pembina Utama/IV E</option>
                             <option value="Pembina Utama Madya/IV D">Pembina Utama Madya/IV D</option>
                             <option value="Pembina Utama Muda/IV C">Pembina Utama Muda/IV C</option>
@@ -266,7 +266,7 @@
                         <div class="form-group">
                           <label for="description">Bidang/Bagian</label>
                           <select name="bagian" class="form-control" style="width: 230px;" required="required">
-                             <option></option>
+                             <option value="<?php echo $row->bagian?>"><?php echo $row->bagian?></option>
                              <option value="1">Umum</option>
                              <option value="2">Fasilitas Kepabeanan</option>
                              <option value="3">Kepatuhan Internal</option>

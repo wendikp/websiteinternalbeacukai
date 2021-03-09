@@ -1225,13 +1225,14 @@ class Surat_permohonan extends CI_Controller {
 
         //mengambil nilai
       $user = $this->session->userdata('username');
-      $query = mysql_query("SELECT nip FROM user WHERE username = '$user'");
-      $user = mysql_fetch_array($query);
+      $conn = mysqli_connect("localhost", "root", "", "humas_rt");
+      $query = mysqli_query($conn, "SELECT nip FROM user WHERE username = '$user'");
+      $user = $query->fetch_array(MYSQLI_ASSOC);
       $nip = $user['nip'];
 
       $i=0;
-      $query = mysql_query("SELECT MAX(kode) as max_kode FROM permintaan_atk");
-      $permintaan_atk = mysql_fetch_array($query);
+      $query = mysqli_query($conn, "SELECT MAX(kode) as max_kode FROM permintaan_atk");
+      $permintaan_atk = $query->fetch_array(MYSQLI_ASSOC);
       $kode = $permintaan_atk['max_kode'];
 
       if ($kode == NULL) {
@@ -1263,6 +1264,8 @@ class Surat_permohonan extends CI_Controller {
       $atk      = $_POST['atk'];
       $volume   = $_POST['volume'];
       $satuan   = $_POST['satuan'];
+      $nomorSurat = $_POST['nosrt'];
+      $tglmohon = $_POST['tglmohon'];
 
             //configurasi
       header("Content-Type: application/vnd.msword");
@@ -1273,9 +1276,10 @@ class Surat_permohonan extends CI_Controller {
 
         //mengambil nilai
       $user = $this->session->userdata('username');
-      echo "$user";
-      $query = mysql_query("SELECT nip FROM user WHERE username = '$user'");
-      $user = mysql_fetch_array($query);
+      // echo "$user";
+      $conn = mysqli_connect("localhost", "root", "", "humas_rt");
+      $query = mysqli_query($conn, "SELECT nip FROM user WHERE username = '$user'");
+      $user = $query->fetch_array(MYSQLI_ASSOC);
       $nip = $user['nip'];
 
       $data = $this->m_proses->selectData($nip);
@@ -1289,7 +1293,6 @@ class Surat_permohonan extends CI_Controller {
         break;
       }
 
-      $nomorSurat = $nosrt;
       $tanggalan  = $tglmohon;
       $tanggal    = $this->konversiTanggal($tanggalan);
 
