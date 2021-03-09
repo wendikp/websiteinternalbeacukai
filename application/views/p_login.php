@@ -14,12 +14,12 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="/assets/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="<?php echo base_url() . "assets" ?>/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="/assets/plugins/iCheck/square/blue.css">
+  <link rel="stylesheet" href="<?php echo base_url() . "assets" ?>/plugins/iCheck/square/blue.css">
 
   <!-- Custom CSS -->
-  <link href="assets/startbootstrap/css/landing-page.css" rel="stylesheet">
+  <link href="<?php echo base_url() . "assets" ?>/startbootstrap/css/landing-page.css" rel="stylesheet">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

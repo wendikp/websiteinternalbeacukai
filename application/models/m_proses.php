@@ -17,16 +17,9 @@ class M_proses extends CI_Model
 		$this->load->database();
 	}
 
-<<<<<<< HEAD
 	public function insert_admin($params)
 	{
 		$nip = rand(500, 1000000000000);
-=======
-
-
-	public function insert_admin($params){
-		$nip = rand(500,1000000000000);
->>>>>>> b59e6fe41ba8c232ba506c9b5f2725c83a0a26e1
 
 		$fields = array(
 			'nip'       => $nip,
@@ -433,22 +426,18 @@ class M_proses extends CI_Model
 		$this->db->insert('kbd', $fields_kbd);
 	}
 
-<<<<<<< HEAD
 	public function insert_ATK($params)
 	{
-=======
-	public function insert_ATK($params){
 		$data = $this->db->query("SELECT id_atk FROM atk ORDER BY id_atk DESC LIMIT 1");
-		
+
 		$cek = $data->result()[0];
 
-        if ($cek->id_atk == NULL) {
+		if ($cek->id_atk == NULL) {
 			$id_atk = 1;
 		} else {
 			$id_atk = $cek->id_atk + 1;
 		}
 
->>>>>>> b59e6fe41ba8c232ba506c9b5f2725c83a0a26e1
 		$fields = array(
 			'id_atk'       => $id_atk,
 			'atk'          => $params['atk'],
@@ -516,7 +505,8 @@ class M_proses extends CI_Model
 		return $data->result();
 	}
 
-	public function select_nip($user){
+	public function select_nip($user)
+	{
 		$data = $this->db->query("
 			SELECT nip FROM user WHERE username = $user
 			");
@@ -1413,13 +1403,9 @@ class M_proses extends CI_Model
 	    ");
 	}
 
-<<<<<<< HEAD
 	public function updateDataUser($params)
 	{
-=======
-	public function updateDataUser($params){
 
->>>>>>> b59e6fe41ba8c232ba506c9b5f2725c83a0a26e1
 		$user      = $params['user'];
 		$pwd       = $params['pwd'];
 		$status    = $params['status'];
