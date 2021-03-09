@@ -1405,7 +1405,6 @@ class M_proses extends CI_Model
 
 	public function updateDataUser($params)
 	{
-
 		$user      = $params['user'];
 		$pwd       = $params['pwd'];
 		$status    = $params['status'];
